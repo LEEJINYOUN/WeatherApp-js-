@@ -1,8 +1,9 @@
+const mainContainer = document.querySelector(".mainContainer");
 const searchInput = document.querySelector(".searchInput");
 const nowDay = document.querySelector(".nowDay");
-const errorMessage = document.querySelector(".errorMessage");
 const mainInfoDetail = document.querySelector(".mainInfoDetail");
 const mainRight = document.querySelector(".mainRight");
+const errorMessage = document.querySelector(".errorMessage");
 const celsius = 273.15;
 let url;
 let isError = false;
@@ -46,6 +47,41 @@ const cityName = {
   창원: "Changwon",
   진주: "Jinju",
   제주도: "Jeju City",
+};
+
+const bgChange = () => {
+  let weather = dataArray.weather[0].icon;
+  if (weather === "01d" || weather === "01n") {
+    mainContainer.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/sky.jpg)";
+  } else if (
+    weather === "02d" ||
+    weather === "02n" ||
+    weather === "03d" ||
+    weather === "03n" ||
+    weather === "04d" ||
+    weather === "04n"
+  ) {
+    mainContainer.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/clouds.jpg)";
+  } else if (
+    weather === "09d" ||
+    weather === "09n" ||
+    weather === "10d" ||
+    weather === "10n"
+  ) {
+    mainContainer.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/rain.jpg)";
+  } else if (weather === "11d" || weather === "11n") {
+    mainContainer.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/thunderstorm.jpg)";
+  } else if (weather === "13d" || weather === "13n") {
+    mainContainer.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/snow.jpg)";
+  } else if (weather === "50d" || weather === "50n") {
+    mainContainer.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/mist.jpg)";
+  }
 };
 
 const htmlRender = () => {
@@ -104,6 +140,7 @@ const getApiData = async () => {
     })
     .then(function (data) {
       dataArray = data;
+      bgChange();
       htmlRender();
     });
 };
