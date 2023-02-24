@@ -10,6 +10,8 @@ let isError = false;
 let dataArray = [];
 let clothesArr;
 
+mainContainer.classList.add("BgDefault");
+
 const todayTime = () => {
   let now = new Date();
   let todayYear = now.getFullYear();
@@ -53,8 +55,7 @@ const cityName = {
 const bgChange = () => {
   let weather = dataArray.weather[0].icon;
   if (weather === "01d" || weather === "01n") {
-    mainContainer.style.backgroundImage =
-      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/sky.jpg)";
+    mainContainer.className = "mainContainer BgSky";
   } else if (
     weather === "02d" ||
     weather === "02n" ||
@@ -63,25 +64,20 @@ const bgChange = () => {
     weather === "04d" ||
     weather === "04n"
   ) {
-    mainContainer.style.backgroundImage =
-      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/clouds.jpg)";
+    mainContainer.className = "mainContainer BgClouds";
   } else if (
     weather === "09d" ||
     weather === "09n" ||
     weather === "10d" ||
     weather === "10n"
   ) {
-    mainContainer.style.backgroundImage =
-      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/rain.jpg)";
+    mainContainer.className = "mainContainer BgRain";
   } else if (weather === "11d" || weather === "11n") {
-    mainContainer.style.backgroundImage =
-      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/thunderstorm.jpg)";
+    mainContainer.className = "mainContainer BgThunderstorm";
   } else if (weather === "13d" || weather === "13n") {
-    mainContainer.style.backgroundImage =
-      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/snow.jpg)";
+    mainContainer.className = "mainContainer BgSnow";
   } else if (weather === "50d" || weather === "50n") {
-    mainContainer.style.backgroundImage =
-      "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./image/mist.jpg)";
+    mainContainer.className = "mainContainer BgMist";
   }
 };
 
@@ -93,7 +89,6 @@ const mouseDown = () => {
   cards.addEventListener("mousedown", (e) => {
     isMouseDown = true;
     cards.classList.add("active");
-
     startX = e.pageX - cards.offsetLeft;
     scrollLeft = cards.scrollLeft;
   });

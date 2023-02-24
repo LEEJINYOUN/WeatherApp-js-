@@ -9,12 +9,45 @@
   height: 100vh;
   display: flex;
   flex-direction: row;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url(./image/default.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   color: white;
+}
+
+.BgDefault {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./image/default.jpg);
+}
+
+.BgSky {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./image/sky.jpg);
+}
+
+.BgClouds {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./image/clouds.jpg);
+}
+
+.BgRain {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./image/rain.jpg);
+}
+
+.BgThunderstorm {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./image/thunderstorm.jpg);
+}
+
+.BgSnow {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./image/snow.jpg);
+}
+
+.BgMist {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./image/mist.jpg);
 }
 
 .mainLeft {
