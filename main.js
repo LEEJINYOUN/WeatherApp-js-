@@ -1,25 +1,3 @@
-$(".carousel").owlCarousel({
-  margin: 20,
-  loop: true,
-  autoplay: true,
-  autoplayTimeout: 2000,
-  autoplayHoverPause: true,
-  responsive: {
-    0: {
-      items: 1,
-      nav: false,
-    },
-    768: {
-      items: 2,
-      nav: false,
-    },
-    1024: {
-      items: 3,
-      nav: false,
-    },
-  },
-});
-
 const mainContainer = document.querySelector(".mainContainer");
 const searchInput = document.querySelector(".searchInput");
 const nowDay = document.querySelector(".nowDay");
@@ -106,6 +84,39 @@ const bgChange = () => {
   }
 };
 
+const mouseDown = () => {
+  const cards = document.querySelector(".cards");
+  let isMouseDown = false;
+  let startX, scrollLeft;
+
+  cards.addEventListener("mousedown", (e) => {
+    isMouseDown = true;
+    cards.classList.add("active");
+
+    startX = e.pageX - cards.offsetLeft;
+    scrollLeft = cards.scrollLeft;
+  });
+
+  cards.addEventListener("mouseleave", () => {
+    isMouseDown = false;
+    cards.classList.remove("active");
+  });
+
+  cards.addEventListener("mouseup", () => {
+    isMouseDown = false;
+    cards.classList.remove("active");
+  });
+
+  cards.addEventListener("mousemove", (e) => {
+    if (!isMouseDown) return;
+
+    e.preventDefault();
+    const x = e.pageX - cards.offsetLeft;
+    const walk = (x - startX) * 1;
+    cards.scrollLeft = scrollLeft - walk;
+  });
+};
+
 const htmlRender = () => {
   let getCityName = Object.keys(cityName).find(
     (key) => cityName[key] === dataArray.name
@@ -135,38 +146,52 @@ const htmlRender = () => {
       <span>${dataArray.weather[0].description}</span>
     </div>`;
 
-  let test = `
+  let resultHTMLRight = `
   <div class="nowDay">${todayTime()}</div>
   <div class="mainBox">
-    <div class="mainInfo">
-      <div class="infoBox">
-      <span class="cityTemp">${(dataArray.main.temp - celsius).toFixed(
-        1
-      )}&nbsp;&#8451;</span>
-      <span class="cityName">${getCityName}</span>
-      <img class="cityImage" src='http://openweathermap.org/img/wn/${
-        dataArray.weather[0].icon
-      }@2x.png' alt="이미지 없음" />
+  <div class="mainInfo">
+    <div class="infoBox">
+    <span class="cityTemp">${(dataArray.main.temp - celsius).toFixed(
+      1
+    )}&nbsp;&#8451;</span>
+    <span class="cityName">${getCityName}</span>
+    <img class="cityImage" src='http://openweathermap.org/img/wn/${
+      dataArray.weather[0].icon
+    }@2x.png' alt="이미지 없음" />
+    </div>
+    <div class="clothesBox">
+      <span class="clothesTitle">- 오늘의 옷추천 -</span>
+      <div class="cardsBox">
+        <div class="cards">
+          <div class="card">
+            <img src="./image/clothes/구두.jpg" alt="없음" />
+            <span>구두</span>
+          </div>
+          <div class="card">
+            <img src="./image/clothes/긴치마.jpg" alt="없음" />
+            <span>긴치마</span>
+          </div>
+          <div class="card">
+            <img src="./image/clothes/긴팔티셔츠.jpg" alt="없음" />
+            <span>긴팔티셔츠</span>
+          </div>
+          <div class="card">
+            <img src="./image/clothes/롱부츠.jpg" alt="없음" />
+            <span>롱부츠</span>
+          </div>
+          <div class="card">
+            <img src="./image/clothes/면바지.jpg" alt="없음" />
+            <span>면바지</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
   `;
-  let resultHTMLRight = `
-  <div class="nowDay">${todayTime()}</div>
-        <div class="mainInfo">
-          <div class="infoBox">
-            <span class="cityTemp">${(dataArray.main.temp - celsius).toFixed(
-              1
-            )}&nbsp;&#8451;</span>
-            <span class="cityName">${getCityName}</span>
-            <img class="cityImage" src='http://openweathermap.org/img/wn/${
-              dataArray.weather[0].icon
-            }@2x.png' alt="이미지 없음" />
-          </div>
-        </div>`;
-
   mainInfoDetail.innerHTML = resultHTMLLeft;
-  mainRight.innerHTML = test;
+  mainRight.innerHTML = resultHTMLRight;
+  mouseDown();
 };
 
 const getApiData = async () => {

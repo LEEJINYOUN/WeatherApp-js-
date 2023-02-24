@@ -132,36 +132,54 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 20%;
   font-size: 20px;
   font-weight: 700;
   color: black;
 }
 
-.wrapper {
-  width: 100%;
-  height: 250px;
-}
-
-.carousel {
-  width: 100%;
-  height: 100%;
+.cardsBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin: auto;
-  padding: 0 30px;
+  width: 100%;
+  height: 80%;
 }
 
-.owl-carousel {
-  display: block;
+.cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 910px;
+  height: 100%;
+  overflow: scroll;
+  overflow-y: hidden;
+  cursor: pointer;
 }
 
-.carousel .card {
+.cards::-webkit-scrollbar-track {
+  border-radius: 0 0 10px 10px;
+}
+
+.cards::-webkit-scrollbar {
+  border-radius: 0 0 10px 10px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+  background-color: #0ae;
+  border-radius: 10px;
+}
+
+.cards .card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 20px 0;
+  margin: 20px;
+  padding: 0 20px;
   height: 170px;
-  line-height: 250px;
   font-size: 90px;
   font-weight: 600;
   color: #fff;
@@ -169,13 +187,13 @@
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.carousel .card img {
+.cards .card img {
   margin: 10px 0;
   width: 100px;
   height: 120px;
 }
 
-.carousel .card span {
+.cards .card span {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -187,33 +205,13 @@
   font-size: 15px;
 }
 
-.owl-dots {
-  text-align: center;
-}
-
-.owl-dot {
-  height: 10px;
-  width: 35px;
-  margin: 0 5px;
-  outline: none;
-  border-radius: 14px;
-  border: 2px solid #0072bc !important;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.owl-dot.active,
-.owl-dot:hover {
-  background: #0072bc !important;
-}
-
 .errorMessageLeft,
 .errorMessageRight {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .errorMessageLeft {
@@ -298,24 +296,24 @@
 
   .clothesTitle {
     font-size: 18px;
+    height: 15%;
   }
 
-  .wrapper {
-    width: 100%;
-    height: calc(100% - 300px);
+  .cardsBox {
+    height: 85%;
   }
 
-  .carousel .card {
+  .cards .card {
     height: 200px;
   }
 
-  .carousel .card img {
+  .cards .card img {
     margin: 15px 0;
   }
 
-  .owl-dot {
-    height: 8px;
-    width: 30px;
+  .errorMessageLeft,
+  .errorMessageRight {
+    font-size: 30px;
   }
 
   .errorMessageRight {
@@ -329,7 +327,7 @@
   }
 
   .InfoItems {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .nowDay {
@@ -341,11 +339,6 @@
     width: 100%;
     height: 30%;
     font-size: 25px;
-  }
-
-  .owl-dot {
-    height: 10px;
-    width: 15px;
   }
 
   .errorMessageLeft,
