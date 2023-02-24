@@ -8,6 +8,7 @@ const celsius = 273.15;
 let url;
 let isError = false;
 let dataArray = [];
+let clothesArr;
 
 const todayTime = () => {
   let now = new Date();
@@ -121,6 +122,198 @@ const htmlRender = () => {
   let getCityName = Object.keys(cityName).find(
     (key) => cityName[key] === dataArray.name
   );
+
+  let temp = (dataArray.main.temp - celsius).toFixed(1);
+
+  if (temp <= 8) {
+    clothesArr = [
+      {
+        name: "털모자",
+        url: "./image/clothes/털모자.jpg",
+      },
+      {
+        name: "코트",
+        url: "./image/clothes/코트.jpg",
+      },
+
+      {
+        name: "패딩",
+        url: "./image/clothes/패딩.jpg",
+      },
+
+      {
+        name: "목도리",
+        url: "./image/clothes/목도리.jpg",
+      },
+      {
+        name: "장갑",
+        url: "./image/clothes/장갑.jpg",
+      },
+      {
+        name: "롱부츠",
+        url: "./image/clothes/롱부츠.jpg",
+      },
+    ];
+  } else if (8 < temp <= 11) {
+    clothesArr = [
+      {
+        name: "후드티",
+        url: "./image/clothes/후드티.jpg",
+      },
+      {
+        name: "니트",
+        url: "./image/clothes/니트.jpg",
+      },
+      {
+        name: "청바지",
+        url: "./image/clothes/청바지.jpg",
+      },
+      {
+        name: "구두",
+        url: "./image/clothes/구두.jpg",
+      },
+      {
+        name: "롱부츠",
+        url: "./image/clothes/롱부츠.jpg",
+      },
+    ];
+  } else if (11 < temp <= 16) {
+    clothesArr = [
+      {
+        name: "후드티",
+        url: "./image/clothes/후드티.jpg",
+      },
+      {
+        name: "긴팔티셔츠",
+        url: "./image/clothes/긴팔티셔츠.jpg",
+      },
+      {
+        name: "면바지",
+        url: "./image/clothes/면바지.jpg",
+      },
+      {
+        name: "청바지",
+        url: "./image/clothes/청바지.jpg",
+      },
+      {
+        name: "구두",
+        url: "./image/clothes/구두.jpg",
+      },
+    ];
+  } else if (16 < temp <= 19) {
+    clothesArr = [
+      {
+        name: "긴팔티셔츠",
+        url: "./image/clothes/긴팔티셔츠.jpg",
+      },
+      {
+        name: "후드티",
+        url: "./image/clothes/후드티.jpg",
+      },
+      {
+        name: "면바지",
+        url: "./image/clothes/면바지.jpg",
+      },
+      {
+        name: "청바지",
+        url: "./image/clothes/청바지.jpg",
+      },
+      {
+        name: "하이힐",
+        url: "./image/clothes/하이힐.jpg",
+      },
+    ];
+  } else if (19 < temp <= 22) {
+    clothesArr = [
+      {
+        name: "반팔셔츠",
+        url: "./image/clothes/반팔셔츠.jpg",
+      },
+      {
+        name: "긴치마",
+        url: "./image/clothes/긴치마.jpg",
+      },
+      {
+        name: "면바지",
+        url: "./image/clothes/면바지.jpg",
+      },
+      {
+        name: "청바지",
+        url: "./image/clothes/청바지.jpg",
+      },
+      {
+        name: "샌들",
+        url: "./image/clothes/샌들.jpg",
+      },
+    ];
+  } else if (22 < temp <= 27) {
+    clothesArr = [
+      {
+        name: "모자",
+        url: "./image/clothes/모자.jpg",
+      },
+      {
+        name: "반팔셔츠",
+        url: "./image/clothes/반팔셔츠.jpg",
+      },
+      {
+        name: "원피스",
+        url: "./image/clothes/원피스.jpg",
+      },
+      {
+        name: "면바지",
+        url: "./image/clothes/면바지.jpg",
+      },
+      {
+        name: "반바지",
+        url: "./image/clothes/반바지.jpg",
+      },
+      {
+        name: "짧은치마",
+        url: "./image/clothes/짧은치마.jpg",
+      },
+      {
+        name: "샌들",
+        url: "./image/clothes/샌들.jpg",
+      },
+    ];
+  } else if (27 < temp) {
+    clothesArr = [
+      {
+        name: "모자",
+        url: "./image/clothes/모자.jpg",
+      },
+      {
+        name: "반팔셔츠",
+        url: "./image/clothes/반팔셔츠.jpg",
+      },
+      {
+        name: "원피스",
+        url: "./image/clothes/원피스.jpg",
+      },
+      {
+        name: "반바지",
+        url: "./image/clothes/반바지.jpg",
+      },
+      {
+        name: "짧은치마",
+        url: "./image/clothes/짧은치마.jpg",
+      },
+      {
+        name: "샌들",
+        url: "./image/clothes/샌들.jpg",
+      },
+    ];
+  }
+
+  let clothesMap = clothesArr.map((item, key) => {
+    return `
+    <div class="card" key=${key}>
+      <img src=${item.url} alt="없음" />
+      <span>${item.name}</span>
+    </div>`;
+  });
+
   let resultHTMLLeft = `
     <div class="InfoItems">
       <span>최대 / 최저 기온</span>
@@ -163,26 +356,7 @@ const htmlRender = () => {
       <span class="clothesTitle">- 오늘의 옷추천 -</span>
       <div class="cardsBox">
         <div class="cards">
-          <div class="card">
-            <img src="./image/clothes/구두.jpg" alt="없음" />
-            <span>구두</span>
-          </div>
-          <div class="card">
-            <img src="./image/clothes/긴치마.jpg" alt="없음" />
-            <span>긴치마</span>
-          </div>
-          <div class="card">
-            <img src="./image/clothes/긴팔티셔츠.jpg" alt="없음" />
-            <span>긴팔티셔츠</span>
-          </div>
-          <div class="card">
-            <img src="./image/clothes/롱부츠.jpg" alt="없음" />
-            <span>롱부츠</span>
-          </div>
-          <div class="card">
-            <img src="./image/clothes/면바지.jpg" alt="없음" />
-            <span>면바지</span>
-          </div>
+        ${clothesMap}
         </div>
       </div>
     </div>
