@@ -20,14 +20,13 @@
 .mainLeft {
   display: flex;
   flex-direction: column;
-  width: 35%;
+  width: 37%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .mainInputBox {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   padding-top: 30px;
   width: 100%;
@@ -59,18 +58,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 700;
 }
 
 .mainRight {
-  width: 65%;
+  width: 63%;
   height: 100%;
 }
 
 .nowDay {
   width: 100%;
-  height: 200px;
+  height: 12%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -79,21 +78,30 @@
   font-weight: bolder;
 }
 
-.mainInfo {
+.mainBox {
   width: 100%;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 12%);
+  position: relative;
+}
+
+.mainInfo {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 510px;
 }
 
 .infoBox {
-  width: 600px;
-  height: 200px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 200px;
 }
 
 .cityTemp,
@@ -111,13 +119,101 @@
   height: 100%;
 }
 
+.clothesBox {
+  margin-top: 10px;
+  width: 100%;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.clothesTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+}
+
+.wrapper {
+  width: 100%;
+  height: 250px;
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 0 30px;
+}
+
+.owl-carousel {
+  display: block;
+}
+
+.carousel .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  height: 170px;
+  line-height: 250px;
+  font-size: 90px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel .card img {
+  margin: 10px 0;
+  width: 100px;
+  height: 120px;
+}
+
+.carousel .card span {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100px;
+  height: 20px;
+  color: black;
+  font-size: 15px;
+}
+
+.owl-dots {
+  text-align: center;
+}
+
+.owl-dot {
+  height: 10px;
+  width: 35px;
+  margin: 0 5px;
+  outline: none;
+  border-radius: 14px;
+  border: 2px solid #0072bc !important;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.owl-dot.active,
+.owl-dot:hover {
+  background: #0072bc !important;
+}
+
 .errorMessageLeft,
 .errorMessageRight {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .errorMessageLeft {
@@ -126,4 +222,134 @@
 
 .errorMessageRight {
   height: calc(100% - 200px);
+}
+
+@media screen and (max-width: 1024px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+
+  .mainLeft {
+    flex-direction: row;
+    width: 100%;
+    height: 40%;
+  }
+
+  .mainInputBox {
+    align-items: center;
+    padding-top: 0px;
+    width: 40%;
+    height: 100%;
+  }
+
+  .mainInputBox > input[type="text"] {
+    width: 250px;
+    font-size: 15px;
+  }
+
+  .mainInfoDetail {
+    width: 60%;
+    height: 100%;
+  }
+
+  .mainRight {
+    width: 100%;
+    height: 60%;
+  }
+
+  .nowDay {
+    height: 10%;
+    font-size: 30px;
+  }
+
+  .mainBox {
+    height: 90%;
+  }
+
+  .mainInfo {
+    flex-direction: row;
+    height: 80%;
+  }
+
+  .infoBox {
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    margin-right: 10px;
+  }
+
+  .cityTemp,
+  .cityName {
+    width: 100%;
+    height: 30%;
+    font-size: 35px;
+  }
+
+  .cityImage {
+    width: 100%;
+    height: 40%;
+  }
+
+  .clothesBox {
+    margin-top: 0px;
+    width: 60%;
+    height: 100%;
+  }
+
+  .clothesTitle {
+    font-size: 18px;
+  }
+
+  .wrapper {
+    width: 100%;
+    height: calc(100% - 300px);
+  }
+
+  .carousel .card {
+    height: 200px;
+  }
+
+  .carousel .card img {
+    margin: 15px 0;
+  }
+
+  .owl-dot {
+    height: 8px;
+    width: 30px;
+  }
+
+  .errorMessageRight {
+    height: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mainInputBox > input[type="text"] {
+    width: 150px;
+  }
+
+  .InfoItems {
+    font-size: 15px;
+  }
+
+  .nowDay {
+    font-size: 25px;
+  }
+
+  .cityTemp,
+  .cityName {
+    width: 100%;
+    height: 30%;
+    font-size: 25px;
+  }
+
+  .owl-dot {
+    height: 10px;
+    width: 15px;
+  }
+
+  .errorMessageLeft,
+  .errorMessageRight {
+    font-size: 24px;
+  }
 }

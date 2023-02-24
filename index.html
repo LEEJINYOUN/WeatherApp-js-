@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
@@ -17,6 +23,46 @@
       </div>
       <div class="mainRight">
         <div class="nowDay"></div>
+        <div class="mainBox">
+          <div class="mainInfo">
+            <div class="infoBox">
+              <span class="cityTemp">10&nbsp;&#8451;</span>
+              <span class="cityName">대구</span>
+              <img
+                class="cityImage"
+                src="./image/default.jpg"
+                alt="이미지 없음"
+              />
+            </div>
+            <div class="clothesBox">
+              <span class="clothesTitle">- 오늘의 추천 -</span>
+              <div class="wrapper">
+                <div class="carousel owl-carousel">
+                  <div class="card">
+                    <img src="./image/clothes/구두.jpg" alt="없음" />
+                    <span>구두</span>
+                  </div>
+                  <div class="card">
+                    <img src="./image/clothes/긴치마.jpg" alt="없음" />
+                    <span>긴치마</span>
+                  </div>
+                  <div class="card">
+                    <img src="./image/clothes/긴팔티셔츠.jpg" alt="없음" />
+                    <span>긴팔티셔츠</span>
+                  </div>
+                  <div class="card">
+                    <img src="./image/clothes/롱부츠.jpg" alt="없음" />
+                    <span>롱부츠</span>
+                  </div>
+                  <div class="card">
+                    <img src="./image/clothes/면바지.jpg" alt="없음" />
+                    <span>면바지</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <script src="main.js"></script>

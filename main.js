@@ -1,3 +1,25 @@
+$(".carousel").owlCarousel({
+  margin: 20,
+  loop: true,
+  autoplay: true,
+  autoplayTimeout: 2000,
+  autoplayHoverPause: true,
+  responsive: {
+    0: {
+      items: 1,
+      nav: false,
+    },
+    768: {
+      items: 2,
+      nav: false,
+    },
+    1024: {
+      items: 3,
+      nav: false,
+    },
+  },
+});
+
 const mainContainer = document.querySelector(".mainContainer");
 const searchInput = document.querySelector(".searchInput");
 const nowDay = document.querySelector(".nowDay");
@@ -112,6 +134,23 @@ const htmlRender = () => {
       <span>날씨 설명</span>
       <span>${dataArray.weather[0].description}</span>
     </div>`;
+
+  let test = `
+  <div class="nowDay">${todayTime()}</div>
+  <div class="mainBox">
+    <div class="mainInfo">
+      <div class="infoBox">
+      <span class="cityTemp">${(dataArray.main.temp - celsius).toFixed(
+        1
+      )}&nbsp;&#8451;</span>
+      <span class="cityName">${getCityName}</span>
+      <img class="cityImage" src='http://openweathermap.org/img/wn/${
+        dataArray.weather[0].icon
+      }@2x.png' alt="이미지 없음" />
+      </div>
+    </div>
+  </div>
+  `;
   let resultHTMLRight = `
   <div class="nowDay">${todayTime()}</div>
         <div class="mainInfo">
@@ -127,7 +166,7 @@ const htmlRender = () => {
         </div>`;
 
   mainInfoDetail.innerHTML = resultHTMLLeft;
-  mainRight.innerHTML = resultHTMLRight;
+  mainRight.innerHTML = test;
 };
 
 const getApiData = async () => {
