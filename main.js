@@ -1,18 +1,21 @@
-const mainContainer = document.querySelector(".mainContainer");
-const searchInput = document.querySelector(".searchInput");
-const nowDay = document.querySelector(".nowDay");
-const mainInfoDetail = document.querySelector(".mainInfoDetail");
-const mainRight = document.querySelector(".mainRight");
+const main = document.querySelector(".main");
+const citySearchInput = document.querySelector(".citySearchInput");
+const todayBox = document.querySelector(".todayBox");
+const cityInfoDetail = document.querySelector(".cityInfoDetail");
+const rightSection = document.querySelector(".rightSection");
 const errorMessage = document.querySelector(".errorMessage");
-const celsius = 273.15;
+const CELSIUS = 273.15;
 let url;
 let isError = false;
 let dataArray = [];
 let clothesArr;
 
-mainContainer.classList.add("BgDefault");
+const init = () => {
+  main.classList.add("BgDefault");
+  todayBox.innerHTML = showToday();
+};
 
-const todayTime = () => {
+const showToday = () => {
   let now = new Date();
   let todayYear = now.getFullYear();
   let todayMonth =
@@ -24,8 +27,6 @@ const todayTime = () => {
     todayYear + ". " + todayMonth + ". " + todayDate + " " + dayOfWeek + "요일"
   );
 };
-
-nowDay.innerHTML = todayTime();
 
 const cityName = {
   서울: "Seoul",
@@ -53,31 +54,23 @@ const cityName = {
 };
 
 const bgChange = () => {
-  let weather = dataArray.weather[0].icon;
-  if (weather === "01d" || weather === "01n") {
-    mainContainer.className = "mainContainer BgSky";
+  let weatherIcon = dataArray.weather[0].icon;
+  if (weatherIcon.includes("01")) {
+    main.className = "main BgSky";
   } else if (
-    weather === "02d" ||
-    weather === "02n" ||
-    weather === "03d" ||
-    weather === "03n" ||
-    weather === "04d" ||
-    weather === "04n"
+    weatherIcon.includes("02") ||
+    weatherIcon.includes("03") ||
+    weatherIcon.includes("04")
   ) {
-    mainContainer.className = "mainContainer BgClouds";
-  } else if (
-    weather === "09d" ||
-    weather === "09n" ||
-    weather === "10d" ||
-    weather === "10n"
-  ) {
-    mainContainer.className = "mainContainer BgRain";
-  } else if (weather === "11d" || weather === "11n") {
-    mainContainer.className = "mainContainer BgThunderstorm";
-  } else if (weather === "13d" || weather === "13n") {
-    mainContainer.className = "mainContainer BgSnow";
-  } else if (weather === "50d" || weather === "50n") {
-    mainContainer.className = "mainContainer BgMist";
+    main.className = "main BgClouds";
+  } else if (weatherIcon.includes("09") || weatherIcon.includes("10")) {
+    main.className = "main BgRain";
+  } else if (weatherIcon.includes("11")) {
+    main.className = "main BgThunderstorm";
+  } else if (weatherIcon.includes("13")) {
+    main.className = "main BgSnow";
+  } else if (weatherIcon.includes("50")) {
+    main.className = "main BgMist";
   }
 };
 
@@ -113,13 +106,7 @@ const mouseDown = () => {
   });
 };
 
-const htmlRender = () => {
-  let getCityName = Object.keys(cityName).find(
-    (key) => cityName[key] === dataArray.name
-  );
-
-  let temp = (dataArray.main.temp - celsius).toFixed(1);
-
+const clothesRenderByTemp = (temp) => {
   if (temp <= 8) {
     clothesArr = [
       {
@@ -300,21 +287,25 @@ const htmlRender = () => {
       },
     ];
   }
+};
 
-  let clothesMap = clothesArr.map((item, key) => {
+const clothesCardRender = () => {
+  return clothesArr.map((item, key) => {
     return `
     <div class="card" key=${key}>
       <img src=${item.url} alt="없음" />
       <span>${item.name}</span>
     </div>`;
   });
+};
 
-  let resultHTMLLeft = `
+const cityInfoDetailRender = () => {
+  return (resultHTMLLeft = `
     <div class="InfoItems">
       <span>최대 / 최저 기온</span>
-      <span>${(dataArray.main.temp_max - celsius).toFixed(1)}
+      <span>${(dataArray.main.temp_max - CELSIUS).toFixed(1)}
       &nbsp;&#8451;&nbsp;/&nbsp;
-      ${(dataArray.main.temp_min - celsius).toFixed(1)}&nbsp;&#8451;
+      ${(dataArray.main.temp_min - CELSIUS).toFixed(1)}&nbsp;&#8451;
       </span>
     </div>
     <div class="InfoItems">
@@ -332,14 +323,16 @@ const htmlRender = () => {
     <div class="InfoItems">
       <span>날씨 설명</span>
       <span>${dataArray.weather[0].description}</span>
-    </div>`;
+    </div>`);
+};
 
-  let resultHTMLRight = `
-  <div class="nowDay">${todayTime()}</div>
-  <div class="mainBox">
-  <div class="mainInfo">
+const cityInfoMainRender = (getCityName) => {
+  return (resultHTMLRight = `
+  <div class="todayBox">${showToday()}</div>
+  <div class="mainInfoBox">
+  <div class="cityInfo">
     <div class="infoBox">
-    <span class="cityTemp">${(dataArray.main.temp - celsius).toFixed(
+    <span class="cityTemp">${(dataArray.main.temp - CELSIUS).toFixed(
       1
     )}&nbsp;&#8451;</span>
     <span class="cityName">${getCityName}</span>
@@ -351,60 +344,73 @@ const htmlRender = () => {
       <span class="clothesTitle">- 오늘의 옷추천 -</span>
       <div class="cardsBox">
         <div class="cards">
-        ${clothesMap}
+        ${clothesCardRender()}
         </div>
       </div>
     </div>
   </div>
 </div>
-  `;
-  mainInfoDetail.innerHTML = resultHTMLLeft;
-  mainRight.innerHTML = resultHTMLRight;
+  `);
+};
+
+const htmlRender = () => {
+  let getCityName = Object.keys(cityName).find(
+    (key) => cityName[key] === dataArray.name
+  );
+  let temp = (dataArray.main.temp - CELSIUS).toFixed(1);
+
+  clothesRenderByTemp(temp);
+
+  cityInfoDetail.innerHTML = cityInfoDetailRender();
+  rightSection.innerHTML = cityInfoMainRender(getCityName);
+
   mouseDown();
 };
 
-const getApiData = async () => {
+const fetchApiData = async (url) => {
   await fetch(url)
-    .then(function (res) {
-      if (!res.ok) {
+    .then((response) => {
+      if (!response.ok) {
         throw Error("데이터 불러오기 실패");
       }
-      return res.json();
+      return response.json();
     })
-    .then(function (data) {
-      dataArray = data;
+    .then((fetchedData) => {
+      dataArray = fetchedData;
       bgChange();
       htmlRender();
     });
 };
 
 const errorRender = () => {
-  let errorMessageLeft = `  <span class="errorMessageLeft">등록되지 않은 지역입니다.</span>`;
-  let errorMessageRight = `
-  <div class="nowDay">${todayTime()}</div>
-  <span class="errorMessageRight">등록되지 않은 지역입니다.</span>
+  let leftErrorMessage = `  <span class="leftErrorMessage">등록되지 않은 지역입니다.</span>`;
+  let rightErrorMessage = `
+  <div class="todayBox">${showToday()}</div>
+  <span class="rightErrorMessage">등록되지 않은 지역입니다.</span>
   `;
-  mainInfoDetail.innerHTML = errorMessageLeft;
-  mainRight.innerHTML = errorMessageRight;
+  cityInfoDetail.innerHTML = leftErrorMessage;
+  rightSection.innerHTML = rightErrorMessage;
 };
 
-const inputLocation = (e) => {
+const searchLocation = (e) => {
   if (e.keyCode == 13) {
-    let location = searchInput.value;
-    let val = cityName[location];
-    if (val) {
+    let location = citySearchInput.value;
+    let cityNameEn = cityName[location];
+    if (cityNameEn) {
       url = new URL(
-        `https://api.openweathermap.org/data/2.5/weather?q=${val}&lang=Kr&appid=ba377ee3d7d4e51eeb16cebe61239877`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityNameEn}&lang=Kr&appid=ba377ee3d7d4e51eeb16cebe61239877`
       );
       isError = false;
-      getApiData();
-      searchInput.value = "";
+      fetchApiData(url);
+      citySearchInput.value = "";
     } else {
       isError = true;
       errorRender();
-      searchInput.value = "";
+      citySearchInput.value = "";
     }
   }
 };
 
-searchInput.addEventListener("keyup", (e) => inputLocation(e));
+init();
+
+citySearchInput.addEventListener("keyup", (e) => searchLocation(e));
